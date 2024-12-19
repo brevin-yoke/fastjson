@@ -92,10 +92,14 @@ func (a *Arena) NewNumberFloat64(f float64) *Value {
 //
 // The returned number is valid until Reset is called on a.
 func (a *Arena) NewNumberInt(n int) *Value {
+	return a.NewNumberInt64(int64(n))
+}
+
+func (a *Arena) NewNumberInt64(n int64) *Value {
 	v := a.c.getValue()
 	v.t = TypeNumber
 	bLen := len(a.b)
-	a.b = strconv.AppendInt(a.b, int64(n), 10)
+	a.b = strconv.AppendInt(a.b, n, 10)
 	v.s = b2s(a.b[bLen:])
 	return v
 }
