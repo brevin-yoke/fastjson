@@ -52,6 +52,11 @@ func (p *Parser) ParseBytes(b []byte) (*Value, error) {
 	return p.Parse(b2s(b))
 }
 
+func (p *Parser) Reset() {
+	p.b = p.b[:0]
+	p.c.reset()
+}
+
 type cache struct {
 	vs []Value
 }
